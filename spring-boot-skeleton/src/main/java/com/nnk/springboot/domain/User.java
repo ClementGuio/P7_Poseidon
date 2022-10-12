@@ -33,7 +33,23 @@ public class User {
 	@Column(name = "role")
     private String role;
 
-    public Integer getId() {
+    public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(@Size(max = 125) @NotBlank(message = "Username is mandatory") String username,
+			@Size(max = 125) @NotBlank(message = "Password is mandatory") String password,
+			@Size(max = 125) @NotBlank(message = "FullName is mandatory") String fullname,
+			@Size(max = 125) @NotBlank(message = "Role is mandatory") String role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
+		this.role = role;
+	}
+
+	public Integer getId() {
         return id;
     }
 
