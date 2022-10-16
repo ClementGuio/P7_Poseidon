@@ -33,8 +33,12 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
-        return "rating/add";
+        if (!result.hasErrors()) {
+        	service.saveRating(rating);
+        	model.addAttribute("allratings",service.getAllRatings());
+        	return "redirect:/rating/list";
+        }
+    	return "rating/add";
     }
 
     @GetMapping("/rating/update/{id}")
@@ -47,8 +51,13 @@ public class RatingController {
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
-        return "redirect:/rating/list";
+        if (result.hasErrors()) {
+        	return "rating/update"; 
+        }
+        rating.setId(id);
+        service.saveRating(rating);
+    	model.addAttribute("allratings",service.getAllRatings());
+    	return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/delete/{id}")

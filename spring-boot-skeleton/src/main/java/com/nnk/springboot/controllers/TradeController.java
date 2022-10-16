@@ -22,7 +22,7 @@ public class TradeController {
 
     @RequestMapping("/trade/list")
     public String home(Model model){
-    	model.addAttribute("trades", service.getAllTrades());
+    	model.addAttribute("alltrades", service.getAllTrades());
         return "trade/list";
     }
 
@@ -33,7 +33,11 @@ public class TradeController {
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
+    	if (!result.hasErrors()) {
+    		service.saveTrade(trade);
+    		model.addAttribute("alltrades", service.getAllTrades());
+    		return "redirect:/trade/list";
+    	}
         return "trade/add";
     }
 
@@ -46,13 +50,19 @@ public class TradeController {
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+    	if (result.hasErrors()) {
+    		return "trade/update";
+    	}
+    	trade.setTradeId(id);
+    	service.saveTrade(trade);
+    	model.addAttribute("alltrades", service.getAllTrades());
         return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
     	service.deleteTrade(service.getTradeById(id));
+    	model.addAttribute("alltrades", service.getAllTrades());
         return "redirect:/trade/list";
     }
 }

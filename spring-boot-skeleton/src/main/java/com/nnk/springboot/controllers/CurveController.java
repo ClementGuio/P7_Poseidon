@@ -32,7 +32,11 @@ public class CurveController {
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Curve list
+    	if (!result.hasErrors()) {
+    		service.saveCurve(curvePoint);
+        	model.addAttribute("allcurves", service.getAllCurves());
+        	return "redirect:/curvePoint/list";
+    	}
         return "curvePoint/add";
     }
 
@@ -46,7 +50,13 @@ public class CurveController {
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Curve and return Curve list
-        return "redirect:/curvePoint/list";
+        if (result.hasErrors()) {
+        	return "/curvePoint/update";
+        }
+        curvePoint.setId(id);
+        service.saveCurve(curvePoint);
+    	model.addAttribute("allcurves", service.getAllCurves());
+    	return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/delete/{id}")
