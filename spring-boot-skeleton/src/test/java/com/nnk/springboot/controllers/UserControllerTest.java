@@ -59,7 +59,7 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "user")
 	public void showUpdateFormTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		
 		this.mvc.perform(get("/user/update/"+user.getId().toString()))
@@ -72,12 +72,12 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "user")
 	public void postUpdateFormTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		
 		this.mvc.perform(post("/user/update/"+user.getId().toString())
 				.param("username", "user")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "NEW")
 				.param("role", "TEST")
 				.sessionAttr("user", new User())
@@ -92,13 +92,127 @@ public class UserControllerTest {
 	
 	@Test
 	@WithMockUser(username = "user")
+	public void postUpdateFormWithTooShortPasswordTest() throws Exception{
+		user = new User("user","Password.8","fullname","TEST");
+		user = repo.save(user);
+		
+		this.mvc.perform(post("/user/update/"+user.getId().toString())
+				.param("username", "user")
+				.param("password", "Short.1")
+				.param("fullname", "NEW")
+				.param("role", "TEST")
+				.sessionAttr("user", new User())
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().hasErrors());
+		
+		repo.delete(user);
+	}
+	
+	@Test
+	@WithMockUser(username = "user")
+	public void postUpdateFormWithPasswordNoUppercaseTest() throws Exception{
+		user = new User("user","Password.8","fullname","TEST");
+		user = repo.save(user);
+		
+		this.mvc.perform(post("/user/update/"+user.getId().toString())
+				.param("username", "user")
+				.param("password", "password.8")
+				.param("fullname", "NEW")
+				.param("role", "TEST")
+				.sessionAttr("user", new User())
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().hasErrors());
+		
+		repo.delete(user);
+	}
+	
+	@Test
+	@WithMockUser(username = "user")
+	public void postUpdateFormWithPasswordNoSpecialTest() throws Exception{
+		user = new User("user","Password.8","fullname","TEST");
+		user = repo.save(user);
+		
+		this.mvc.perform(post("/user/update/"+user.getId().toString())
+				.param("username", "user")
+				.param("password", "Passwordd8")
+				.param("fullname", "NEW")
+				.param("role", "TEST")
+				.sessionAttr("user", new User())
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().hasErrors());
+		
+		repo.delete(user);
+	}
+	
+	@Test
+	@WithMockUser(username = "user")
+	public void postUpdateFormWithPasswordNoNumberTest() throws Exception{
+		user = new User("user","Password.8","fullname","TEST");
+		user = repo.save(user);
+		
+		this.mvc.perform(post("/user/update/"+user.getId().toString())
+				.param("username", "user")
+				.param("password", "Password..")
+				.param("fullname", "NEW")
+				.param("role", "TEST")
+				.sessionAttr("user", new User())
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().hasErrors());
+		
+		repo.delete(user);
+	}
+	
+	@Test
+	@WithMockUser(username = "user")
+	public void postUpdateFormWithPasswordWhitespaceTest() throws Exception{
+		user = new User("user","Password.8","fullname","TEST");
+		user = repo.save(user);
+		
+		this.mvc.perform(post("/user/update/"+user.getId().toString())
+				.param("username", "user")
+				.param("password", "P ssword.8")
+				.param("fullname", "NEW")
+				.param("role", "TEST")
+				.sessionAttr("user", new User())
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().hasErrors());
+		
+		repo.delete(user);
+	}
+	
+	@Test
+	@WithMockUser(username = "user")
+	public void postUpdateFormWithPasswordLowercaseTest() throws Exception{
+		user = new User("user","Password.8","fullname","TEST");
+		user = repo.save(user);
+		
+		this.mvc.perform(post("/user/update/"+user.getId().toString())
+				.param("username", "user")
+				.param("password", "PASSWORD.8")
+				.param("fullname", "NEW")
+				.param("role", "TEST")
+				.sessionAttr("user", new User())
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().hasErrors());
+		
+		repo.delete(user);
+	}
+	
+	@Test
+	@WithMockUser(username = "user")
 	public void postUpdateFormWithBlankUsernameTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		
 		this.mvc.perform(post("/user/update/"+user.getId().toString())
 				.param("username", "")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "fullname")
 				.param("role", "TEST")
 				.sessionAttr("user", new User())
@@ -112,7 +226,7 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "user")
 	public void postUpdateFormWithBlankPasswordTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		
 		this.mvc.perform(post("/user/update/"+user.getId().toString())
@@ -131,12 +245,12 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "user")
 	public void postUpdateFormWithBlankFullnameTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		
 		this.mvc.perform(post("/user/update/"+user.getId().toString())
 				.param("username", "user")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "")
 				.param("role", "TEST")
 				.sessionAttr("user", new User())
@@ -150,12 +264,12 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "user")
 	public void postUpdateFormWithBlankRoleTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		
 		this.mvc.perform(post("/user/update/"+user.getId().toString())
 				.param("username", "user")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "fullname")
 				.param("role", "")
 				.sessionAttr("user", new User())
@@ -171,7 +285,7 @@ public class UserControllerTest {
 	public void validateAddFormTest() throws Exception{
 		this.mvc.perform(post("/user/validate")
 				.param("username", "user")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "fullname")
 				.param("role", "TEST")
 				.sessionAttr("user", new User())
@@ -190,7 +304,7 @@ public class UserControllerTest {
 	public void validateAddFormWithBlankUsernameTest() throws Exception{
 		this.mvc.perform(post("/user/validate")
 				.param("username", "")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "fullname")
 				.param("role", "TEST")
 				.sessionAttr("user", new User())
@@ -220,7 +334,7 @@ public class UserControllerTest {
 	public void validateAddFormWithBlankFullnameTest() throws Exception{
 		this.mvc.perform(post("/user/validate")
 				.param("username", "user")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "")
 				.param("role", "TEST")
 				.sessionAttr("user", new User())
@@ -234,7 +348,7 @@ public class UserControllerTest {
 	public void validateAddFormWithBlankRoleTest() throws Exception{
 		this.mvc.perform(post("/user/validate")
 				.param("username", "user")
-				.param("password", "password")
+				.param("password", "Password.8")
 				.param("fullname", "fullname")
 				.param("role", "")
 				.sessionAttr("user", new User())
@@ -246,7 +360,7 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser(username = "user")
 	public void deleteTest() throws Exception{
-		user = new User("user","password","fullname","TEST");
+		user = new User("user","Password.8","fullname","TEST");
 		user = repo.save(user);
 		Integer id = user.getId();
 		

@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.nnk.springboot.annotations.ValidPassword;
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -18,7 +20,7 @@ public class User {
 	@Column(name = "username")
     private String username;
     
-	@Size(max=125)
+	@ValidPassword(message = "Password must have at least 8 characters, 1 upper case, 1 number and 1 special character.")
 	@NotBlank(message = "Password is mandatory")
 	@Column(name = "password")
     private String password;
