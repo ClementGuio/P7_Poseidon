@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,7 +15,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Rating;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataJpaTest
 public class BidListServiceTest {
 
 	@Autowired
@@ -50,6 +52,7 @@ public class BidListServiceTest {
 		service.deleteBid(bid2);
 		result = service.getBidById(id2);
 		Assert.assertNull(result);
+
 	}
 	
 

@@ -2,7 +2,6 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,8 +21,7 @@ public class UserController {
     private UserService service;
 
     @RequestMapping("/user/list")
-    public String home(Model model)
-    {
+    public String home(Model model){
         model.addAttribute("users", service.getAllUsers());
         return "user/list";
     }
@@ -47,7 +45,10 @@ public class UserController {
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-    	User user = service.getUserById(id); //FIXME: throw  new IllegalArgumentException("Invalid user Id:" + id));
+    	User user = service.getUserById(id);
+    	if (user==null){
+    		throw new IllegalArgumentException("Invalid user Id:" + id);
+    	}
         user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
@@ -70,7 +71,10 @@ public class UserController {
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
-        User user = service.getUserById(id);//FIXME: throw  new IllegalArgumentException("Invalid user Id:" + id));
+        User user = service.getUserById(id);
+        if (user==null){
+        	throw new IllegalArgumentException("Invalid user Id:" + id);
+        }
         service.deleteUser(user);
         model.addAttribute("users", service.getAllUsers());
         return "redirect:/user/list";

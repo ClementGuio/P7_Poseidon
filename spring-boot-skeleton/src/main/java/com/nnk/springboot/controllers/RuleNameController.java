@@ -43,7 +43,7 @@ public class RuleNameController {
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
     	RuleName rule = service.getRuleById(id);
-    	model.addAttribute("rule", rule);
+    	model.addAttribute("ruleName", rule);
         return "ruleName/update";
     }
 
@@ -51,7 +51,7 @@ public class RuleNameController {
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
     	if (result.hasErrors()) {
-    		return "ruleName/update";
+    		return "/ruleName/update";
     	}
     	ruleName.setId(id);
     	service.saveRule(ruleName);

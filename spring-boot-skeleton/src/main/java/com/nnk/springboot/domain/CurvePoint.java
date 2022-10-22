@@ -8,48 +8,49 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "CurvePoint")
 public class CurvePoint {
-    // TODO: Verify validations annotations
 	
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "Id")
-	Integer id;
+	private Integer id;
 	
+	@NotNull(message="CurveId is mandatory.")
 	@Column(name = "CurveId")
-	Integer curveId;
+	private Integer curveId;
 	
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "asOfDate")
-	LocalDateTime asOfDate;
-	
+	private Timestamp asOfDate;
+
+	@NotNull(message="Term is mandatory.")
 	@Column(name = "term")
-	Double term;
+	private Double term;
 
+	@NotNull(message="Value is mandatory.")
 	@Column(name = "value")
-	Double value;
+	private Double value;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "creationDate")
-	LocalDateTime creationDate;
+	private Timestamp creationDate;
 
 	public CurvePoint() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public CurvePoint(Integer curveId, Double term, Double value) {
+	
+	public CurvePoint(@NotNull(message = "CurveId is mandatory.") Integer curveId,
+			@NotNull(message = "Term is mandatory.") Double term,
+			@NotNull(message = "Value is mandatory.") Double value) {
 		super();
 		this.curveId = curveId;
 		this.term = term;
 		this.value = value;
 	}
-
-	public CurvePoint(Integer curveId, LocalDateTime asOfDate, Double term, Double value,
-			LocalDateTime creationDate) {
+	
+	public CurvePoint(@NotNull(message = "CurveId is mandatory.") Integer curveId, Timestamp asOfDate,
+			@NotNull(message = "Term is mandatory.") Double term,
+			@NotNull(message = "Value is mandatory.") Double value, Timestamp creationDate) {
 		super();
 		this.curveId = curveId;
 		this.asOfDate = asOfDate;
@@ -61,11 +62,11 @@ public class CurvePoint {
 	public Integer getId() {
 		return id;
 	}
-
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 	public Integer getCurveId() {
 		return curveId;
 	}
@@ -74,11 +75,11 @@ public class CurvePoint {
 		this.curveId = curveId;
 	}
 
-	public LocalDateTime getAsOfDate() {
+	public Timestamp getAsOfDate() {
 		return asOfDate;
 	}
 
-	public void setAsOfDate(LocalDateTime asOfDate) {
+	public void setAsOfDate(Timestamp asOfDate) {
 		this.asOfDate = asOfDate;
 	}
 
@@ -98,11 +99,12 @@ public class CurvePoint {
 		this.value = value;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
+
 }

@@ -8,37 +8,38 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "rating")
+@Table(name = "Rating")
 public class Rating {
-    // TODO: verify validation annotations
 
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "Id")
-	Integer id;
+	private Integer id;
 
-	@Size(max=125)
+	@Size(max=125, message="MoodysRating must not exceed 125 characters.")
 	@Column(name = "moodysRating")
-	String moodysRating;
+	private String moodysRating;
 
-	@Size(max=125)
+	@Size(max=125, message="SandPRating must not exceed 125 characters.")
 	@Column(name = "sandPRating")
-	String sandPRating;
+	private String sandPRating;
 	
-	@Size(max=125)
+	@Size(max=125, message="FitchRating must not exceed 125 characters.")
 	@Column(name = "fitchRating")
-	String fitchRating;
+	private String fitchRating;
 
+	@NotNull
 	@Column(name = "orderNumber")
-	Integer orderNumber;
+	private Integer orderNumber;
 
 	public Rating() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public Rating(@Size(max = 125) String moodysRating, @Size(max = 125) String sandPRating,
-			@Size(max = 125) String fitchRating, Integer orderNumber) {
+	
+	public Rating(@Size(max = 125, message = "MoodysRating must not exceed 125 characters.") String moodysRating,
+			@Size(max = 125, message = "SandPRating must not exceed 125 characters.") String sandPRating,
+			@Size(max = 125, message = "FitchRating must not exceed 125 characters.") String fitchRating,
+			@NotNull Integer orderNumber) {
 		super();
 		this.moodysRating = moodysRating;
 		this.sandPRating = sandPRating;

@@ -7,112 +7,120 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-
 @Entity
-@Table(name = "trade")
+@Table(name = "Trade")
 public class Trade {
 	
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "TradeId")
-	Integer tradeId;
+	private Integer tradeId;
 
-	@NotBlank
-	@Size(max=30)
+	@NotBlank(message="Account is mandatory.")
+	@Size(max=30, message="Account must not exceed 30 characters.")
 	@Column(name = "account")
-	String account;
+	private String account;
 
-	@NotBlank
-	@Size(max=30)
+	@NotBlank(message="Type is mandatory.")
+	@Size(max=30, message="Type must not exceed 30 characters.")
 	@Column(name = "type")
-	String type;
+	private String type;
 	
 	@Column(name = "buyQuantity")
-	Double buyQuantity;
+	private Double buyQuantity;
 	
 	@Column(name = "sellQuantity")
-	Double sellQuantity;
+	private Double sellQuantity;
 
 	@Column(name = "buyPrice")
-	Double buyPrice;
+	private Double buyPrice;
 
 	@Column(name = "sellPrice")
-	Double sellPrice;
+	private Double sellPrice;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "tradeDate")
-	LocalDateTime tradeDate;
+	private Timestamp tradeDate;
 
-	@Size(max=125)
+	@Size(max=125, message="Security must not exceed 125 characters.")
 	@Column(name = "security")
-	String security;
+	private String security;
 
-	@Size(max=10)
+	@Size(max=10, message="Status must not exceed 10 characters.")
 	@Column(name = "status")
-	String status;
+	private String status;
 
-	@Size(max=125)
+	@Size(max=125, message="Trader must not exceed 125 characters.")
 	@Column(name = "trader")
-	String trader;
+	private String trader;
 
-	@Size(max=125)
+	@Size(max=125, message="Benchmark must not exceed 125 characters.")
 	@Column(name = "benchmark")
-	String benchmark;
+	private String benchmark;
 
-	@Size(max=125)
+	@Size(max=125, message="Book must not exceed 125 characters.")
 	@Column(name = "book")
-	String book;
+	private String book;
 	
-	@Size(max=125)
+	@Size(max=125, message="CreationName must not exceed 125 characters.")
 	@Column(name = "creationName")
-	String creationName;
+	private String creationName;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "creationDate")
-	LocalDateTime creationDate;
+	private Timestamp creationDate;
 	
-	@Size(max=125)
+	@Size(max=125, message="RevisionName must not exceed 125 characters.")
 	@Column(name = "revisionName")
-	String revisionName;
+	private String revisionName;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "revisionDate")
-	LocalDateTime revisionDate;
+	private Timestamp revisionDate;
 	
-	@Size(max=125)
+	@Size(max=125, message="DealName must not exceed 125 characters.")
 	@Column(name = "dealName")
-	String dealName;
+	private String dealName;
 
-	@Size(max=125)
+	@Size(max=125, message="DealType must not exceed 125 characters.")
 	@Column(name = "dealType")
-	String dealType;
+	private String dealType;
 
-	@Size(max=125)
+	@Size(max=125, message="SourceListId must not exceed 125 characters.")
 	@Column(name = "sourceListId")
-	String sourceListId;
+	private String sourceListId;
 	
-	@Size(max=125)
+	@Size(max=125, message="Side must not exceed 125 characters.")
 	@Column(name = "side")
-	String side;
+	private String side;
 
 	public Trade() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Trade(@NotBlank @Size(max = 30) String account, @NotBlank @Size(max = 30) String type) {
+	public Trade(
+			@NotBlank(message = "Account is mandatory.") @Size(max = 30, message = "Account must not exceed 30 characters.") String account,
+			@NotBlank(message = "Type is mandatory.") @Size(max = 30, message = "Type must not exceed 30 characters.") String type) {
 		super();
 		this.account = account;
 		this.type = type;
 	}
 
-	public Trade(@NotBlank @Size(max = 30) String account, @NotBlank @Size(max = 30) String type, Double buyQuantity,
-			Double sellQuantity, Double buyPrice, Double sellPrice, LocalDateTime tradeDate,
-			@Size(max = 125) String security, @Size(max = 10) String status, @Size(max = 125) String trader,
-			@Size(max = 125) String benchmark, @Size(max = 125) String book, @Size(max = 125) String creationName,
-			LocalDateTime creationDate, @Size(max = 125) String revisionName, LocalDateTime revisionDate,
-			@Size(max = 125) String dealName, @Size(max = 125) String dealType, @Size(max = 125) String sourceListId,
-			@Size(max = 125) String side) {
+	public Trade(
+			@NotBlank(message = "Account is mandatory.") @Size(max = 30, message = "Account must not exceed 30 characters.") String account,
+			@NotBlank(message = "Type is mandatory.") @Size(max = 30, message = "Type must not exceed 30 characters.") String type,
+			@NotBlank(message = "BuyQuantity is mandatory") Double buyQuantity, Double sellQuantity, Double buyPrice,
+			Double sellPrice, Timestamp tradeDate,
+			@Size(max = 125, message = "Security must not exceed 125 characters.") String security,
+			@Size(max = 10, message = "Status must not exceed 10 characters.") String status,
+			@Size(max = 125, message = "Trader must not exceed 125 characters.") String trader,
+			@Size(max = 125, message = "Benchmark must not exceed 125 characters.") String benchmark,
+			@Size(max = 125, message = "Book must not exceed 125 characters.") String book,
+			@Size(max = 125, message = "CreationName must not exceed 125 characters.") String creationName,
+			Timestamp creationDate,
+			@Size(max = 125, message = "RevisionName must not exceed 125 characters.") String revisionName,
+			Timestamp revisionDate,
+			@Size(max = 125, message = "DealName must not exceed 125 characters.") String dealName,
+			@Size(max = 125, message = "DealType must not exceed 125 characters.") String dealType,
+			@Size(max = 125, message = "SourceListId must not exceed 125 characters.") String sourceListId,
+			@Size(max = 125, message = "Side must not exceed 125 characters.") String side) {
 		super();
 		this.account = account;
 		this.type = type;
@@ -192,11 +200,11 @@ public class Trade {
 		this.sellPrice = sellPrice;
 	}
 
-	public LocalDateTime getTradeDate() {
+	public Timestamp getTradeDate() {
 		return tradeDate;
 	}
 
-	public void setTradeDate(LocalDateTime tradeDate) {
+	public void setTradeDate(Timestamp tradeDate) {
 		this.tradeDate = tradeDate;
 	}
 
@@ -248,11 +256,11 @@ public class Trade {
 		this.creationName = creationName;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -264,11 +272,11 @@ public class Trade {
 		this.revisionName = revisionName;
 	}
 
-	public LocalDateTime getRevisionDate() {
+	public Timestamp getRevisionDate() {
 		return revisionDate;
 	}
 
-	public void setRevisionDate(LocalDateTime revisionDate) {
+	public void setRevisionDate(Timestamp revisionDate) {
 		this.revisionDate = revisionDate;
 	}
 

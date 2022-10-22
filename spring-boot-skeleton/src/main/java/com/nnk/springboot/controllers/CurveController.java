@@ -42,7 +42,7 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-    	model.addAttribute("curve", service.getCurveById(id));
+    	model.addAttribute("curvePoint", service.getCurveById(id));
         return "curvePoint/update";
     }
 

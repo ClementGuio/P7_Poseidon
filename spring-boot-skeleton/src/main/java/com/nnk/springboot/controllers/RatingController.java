@@ -52,7 +52,7 @@ public class RatingController {
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
-        	return "rating/update"; 
+        	return "/rating/update"; 
         }
         rating.setId(id);
         service.saveRating(rating);

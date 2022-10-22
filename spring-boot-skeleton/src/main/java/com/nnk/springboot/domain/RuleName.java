@@ -7,46 +7,50 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "rulename")
+@Table(name = "RuleName")
 public class RuleName {
-    // TODO: verify validation annotations
-	
+	//TODO: verifier message annotations
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "Id")
-	Integer id;
+	private Integer id;
 
-	@Size(max=125)
+	@NotBlank
+	@Size(max=125, message="Name must not exceed 125 characters.")
 	@Column(name = "name")
-	String name;
+	private String name;
 
-	@Size(max=125)
+	@NotBlank
+	@Size(max=125, message="Description must not exceed 125 characters.")
 	@Column(name = "description")
-	String description;
+	private String description;
 
-	@Size(max=125)
+	@Size(max=125, message="Json must not exceed 125 characters.")
 	@Column(name = "json")
-	String json;
+	private String json;
 
-	@Size(max=512)
+	@Size(max=512, message="Template must not exceed 512 characters.")
 	@Column(name = "template")
-	String template;
+	private String template;
 
-	@Size(max=125)
+	@Size(max=125, message="SqlStr must not exceed 125 characters.")
 	@Column(name = "sqlStr")
-	String sqlStr;
+	private String sqlStr;
 	
-	@Size(max=125)
+	@Size(max=125, message="SqlPart must not exceed 125 characters.")
 	@Column(name = "sqlPart")
-	String sqlPart;
+	private String sqlPart;
 
 	public RuleName() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public RuleName(@Size(max = 125) String name, @Size(max = 125) String description, @Size(max = 125) String json,
-			@Size(max = 512) String template, @Size(max = 125) String sqlStr, @Size(max = 125) String sqlPart) {
+	public RuleName(@NotBlank @Size(max = 125, message = "Name must not exceed 125 characters.") String name,
+			@NotBlank @Size(max = 125, message = "Description must not exceed 125 characters.") String description,
+			@Size(max = 125, message = "Json must not exceed 125 characters.") String json,
+			@Size(max = 512, message = "Template must not exceed 512 characters.") String template,
+			@Size(max = 125, message = "SqlStr must not exceed 125 characters.") String sqlStr,
+			@Size(max = 125, message = "SqlPart must not exceed 125 characters.") String sqlPart) {
 		super();
 		this.name = name;
 		this.description = description;

@@ -1,6 +1,6 @@
 package com.nnk.springboot.domain;
 
-import org.springframework.beans.factory.annotation.Required;//TODO: quelle intérêt??
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;//TODO: BigDecimal
@@ -13,117 +13,124 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bidlist")
+@Table(name = "BidList")
 public class BidList {
-    //TODO: add validations annotations
-	//TODO: see validations for sql types
+
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "BidListId")
-	Integer bidListId;
+	private Integer bidListId;
 	
-	@NotBlank
-	@Size(max=30)
+	@NotBlank(message="Account is mandatory.")
+	@Size(max=30, message="Account must not exceed 30 characters.")
 	@Column(name = "account")
-	String account;
+	private String account;
 	
-	@NotBlank
-	@Size(max=30)
+	@NotBlank(message="Type is mandatory.")
+	@Size(max=30, message="Type must not exceed 30 characters.")
 	@Column(name = "type")
-	String type;
+	private String type;
 
+	@NotNull(message = "BidQuantity is mandatory.")
 	@Column(name = "bidQuantity")
-	Double bidQuantity;
+	private Double bidQuantity;
 
 	@Column(name = "askQuantity")
-	Double askQuantity;
+	private Double askQuantity;
 	
 	@Column(name = "bid")
-	Double bid;
+	private Double bid;
 
 	@Column(name = "ask")
-	Double ask;
+	private Double ask;
 
-	@Size(max=125)
+	@Size(max=125, message="Benchmark must not exceed 125 characters.")
 	@Column(name = "benchmark")
-	String benchmark;
+	private String benchmark;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "bidListDate")
-	LocalDateTime bidListDate;
+	private Timestamp bidListDate;
 
-	@Size(max=125)
+	@Size(max=125, message="Commentary must not exceed 125 characters.")
 	@Column(name = "commentary")
-	String commentary;
+	private String commentary;
 
-	@Size(max=125)
+	@Size(max=125, message="Security must not exceed 125 characters.")
 	@Column(name = "security")
-	String security;
+	private String security;
 
-	@Size(max=10)
+	@Size(max=10, message="Status must not exceed 10 characters.")
 	@Column(name = "status")
-	String status;
+	private String status;
 
-	@Size(max=125)
+	@Size(max=125, message="Trader must not exceed 125 characters.")
 	@Column(name = "trader")
-	String trader;
+	private String trader;
 
-	@Size(max=125)
+	@Size(max=125, message="Book must not exceed 125 characters.")
 	@Column(name = "book")
-	String book;
+	private String book;
 
-	@Size(max=125)
+	@Size(max=125, message="CreationName must not exceed 125 characters.")
 	@Column(name = "creationName")
-	String creationName;
+	private String creationName;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "creationDate")
-	LocalDateTime creationDate;
+	private Timestamp creationDate;
 
-	@Size(max=125)
+	@Size(max=125, message="RevisionName must not exceed 125 characters.")
 	@Column(name = "revisionName")
-	String revisionName;
+	private String revisionName;
 
-	//TODO: verify that LocalDateTime match with usage
 	@Column(name = "revisionDate")
-	LocalDateTime revisionDate;
+	private Timestamp revisionDate;
 
-	@Size(max=125)
+	@Size(max=125, message="DealName must not exceed 125 characters.")
 	@Column(name = "dealName")
-	String dealName;
+	private String dealName;
 	
-	@Size(max=125)
+	@Size(max=125, message="DealType must not exceed 125 characters.")
 	@Column(name = "dealType")
-	String dealType;
+	private String dealType;
 
-	@Size(max=125)
+	@Size(max=125, message="SourceListId must not exceed 125 characters.")
 	@Column(name = "sourceListId")
-	String sourceListId;
+	private String sourceListId;
 	
-	@Size(max=125)
+	@Size(max=125, message="Side must not exceed 125 characters.")
 	@Column(name = "side")
-	String side;
+	private String side;
 
 	public BidList() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public BidList(@NotBlank @Size(max = 30) String account, @NotBlank @Size(max = 30) String type,
-			Double bidQuantity) {
+	public BidList(
+			@NotBlank(message = "Account is mandatory.") @Size(max = 30, message = "Account must not exceed 30 characters.") String account,
+			@NotBlank(message = "Type is mandatory.") @Size(max = 30, message = "Type must not exceed 30 characters.") String type,
+			@NotNull Double bidQuantity) {
 		super();
 		this.account = account;
 		this.type = type;
 		this.bidQuantity = bidQuantity;
 	}
-
-	public BidList(@NotBlank @Size(max = 30) String account, @NotBlank @Size(max = 30) String type,
-			Double bidQuantity, Double askQuantity, Double bid, Double ask, @Size(max = 125) String benchmark,
-			LocalDateTime bidListDate, @Size(max = 125) String commentary, @Size(max = 125) String security,
-			@Size(max = 10) String status, @Size(max = 125) String trader, @Size(max = 125) String book,
-			@Size(max = 125) String creationName, LocalDateTime creationDate, @Size(max = 125) String revisionName,
-			LocalDateTime revisionDate, @Size(max = 125) String dealName, @Size(max = 125) String dealType,
-			@Size(max = 125) String sourceListId, @Size(max = 125) String side) {
+	
+	public BidList(@NotBlank(message = "Account is mandatory.") @Size(max = 30, message = "Account must not exceed 30 characters.") String account,
+			@NotBlank(message = "Type is mandatory.") @Size(max = 30, message = "Type must not exceed 30 characters.") String type,
+			@NotNull Double bidQuantity, Double askQuantity, Double bid, Double ask,
+			@Size(max = 125, message = "Benchmark must not exceed 125 characters.") String benchmark, Timestamp bidListDate,
+			@Size(max = 125, message = "Commentary must not exceed 125 characters.") String commentary,
+			@Size(max = 125, message = "Security must not exceed 125 characters.") String security,
+			@Size(max = 10, message = "Status must not exceed 10 characters.") String status,
+			@Size(max = 125, message = "Trader must not exceed 125 characters.") String trader,
+			@Size(max = 125, message = "Book must not exceed 125 characters.") String book,
+			@Size(max = 125, message = "CreationName must not exceed 125 characters.") String creationName,
+			Timestamp creationDate,
+			@Size(max = 125, message = "RevisionName must not exceed 125 characters.") String revisionName,
+			Timestamp revisionDate, @Size(max = 125, message = "DealName must not exceed 125 characters.") String dealName,
+			@Size(max = 125, message = "DealType must not exceed 125 characters.") String dealType,
+			@Size(max = 125, message = "SourceListId must not exceed 125 characters.") String sourceListId,
+			@Size(max = 125, message = "Side must not exceed 125 characters.") String side) {
 		super();
 		this.account = account;
 		this.type = type;
@@ -147,11 +154,11 @@ public class BidList {
 		this.sourceListId = sourceListId;
 		this.side = side;
 	}
-
+	
 	public Integer getBidListId() {
 		return bidListId;
 	}
-
+	
 	public void setBidListId(Integer bidListId) {
 		this.bidListId = bidListId;
 	}
@@ -212,11 +219,11 @@ public class BidList {
 		this.benchmark = benchmark;
 	}
 
-	public LocalDateTime getBidListDate() {
+	public Timestamp getBidListDate() {
 		return bidListDate;
 	}
 
-	public void setBidListDate(LocalDateTime bidListDate) {
+	public void setBidListDate(Timestamp bidListDate) {
 		this.bidListDate = bidListDate;
 	}
 
@@ -268,11 +275,11 @@ public class BidList {
 		this.creationName = creationName;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -284,11 +291,11 @@ public class BidList {
 		this.revisionName = revisionName;
 	}
 
-	public LocalDateTime getRevisionDate() {
+	public Timestamp getRevisionDate() {
 		return revisionDate;
 	}
 
-	public void setRevisionDate(LocalDateTime revisionDate) {
+	public void setRevisionDate(Timestamp revisionDate) {
 		this.revisionDate = revisionDate;
 	}
 
@@ -323,5 +330,5 @@ public class BidList {
 	public void setSide(String side) {
 		this.side = side;
 	}
-	
+
 }

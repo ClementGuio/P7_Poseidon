@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,7 +14,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataJpaTest
 public class TradeServiceTest {
 
 	@Autowired

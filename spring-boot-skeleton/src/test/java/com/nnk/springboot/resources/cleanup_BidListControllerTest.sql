@@ -1,0 +1,1 @@
+DELETE FROM bid_list WHERE BidListId > 250;

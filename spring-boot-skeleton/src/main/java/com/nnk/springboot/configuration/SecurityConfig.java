@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -26,11 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new JdbcUserDetailsManager(dataSource);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Bean 
 	public PasswordEncoder passwordEncoder() { 
-	    //return new BCryptPasswordEncoder();
-		return NoOpPasswordEncoder.getInstance();
+	    return new BCryptPasswordEncoder();
 	}
 	
 	@Override
@@ -38,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
 		.passwordEncoder(passwordEncoder())
-		.usersByUsernameQuery("select username,password,'true' as enabled from Users where username=?")//TODO : revoir requêtes
-		.authoritiesByUsernameQuery("select username, role from Users where username=?");
+		.usersByUsernameQuery("select username,password,'true' as enabled from users where username=?")//TODO : revoir requêtes
+		.authoritiesByUsernameQuery("select username, role from users where username=?");
 	}
 	
 	//TODO : ajouter contraintes	

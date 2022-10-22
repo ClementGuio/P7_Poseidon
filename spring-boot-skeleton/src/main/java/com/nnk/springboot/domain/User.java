@@ -1,11 +1,11 @@
-package com.nnk.springboot.domain;
+ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class User {
 
 	@Id
@@ -35,7 +35,6 @@ public class User {
 
     public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(@Size(max = 125) @NotBlank(message = "Username is mandatory") String username,
