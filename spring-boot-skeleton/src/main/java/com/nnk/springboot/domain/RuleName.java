@@ -9,18 +9,18 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "RuleName")
 public class RuleName {
-	//TODO: verifier message annotations
+
 	@Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "Id")
 	private Integer id;
 
-	@NotBlank
+	@NotBlank(message= "Name is mandatory.")
 	@Size(max=125, message="Name must not exceed 125 characters.")
 	@Column(name = "name")
 	private String name;
 
-	@NotBlank
+	@NotBlank(message= "Description is mandatory.")
 	@Size(max=125, message="Description must not exceed 125 characters.")
 	@Column(name = "description")
 	private String description;

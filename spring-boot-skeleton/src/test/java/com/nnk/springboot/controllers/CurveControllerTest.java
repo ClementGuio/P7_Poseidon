@@ -145,7 +145,7 @@ public class CurveControllerTest {
 	@WithMockUser(username = "user")
 	public void validateAddFormTest() throws Exception{
 		this.mvc.perform(post("/curvePoint/validate")
-				.param("curveId", "777")
+				.param("curveId", "-1")
 				.param("term", "22.0")
 				.param("value", "2.0")
 				.sessionAttr("curve", new CurvePoint())
@@ -153,7 +153,7 @@ public class CurveControllerTest {
 			.andExpect(status().isFound())
 			.andExpect(model().hasNoErrors());
 		
-		List<CurvePoint> res = repo.findByCurveId(-1);
+		List<CurvePoint> res = repo.findByCurveId(777);
 		for (CurvePoint curve : res) {
 			repo.delete(curve);
 		}

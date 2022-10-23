@@ -37,22 +37,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
 		.passwordEncoder(passwordEncoder())
-		.usersByUsernameQuery("select username,password,'true' as enabled from users where username=?")//TODO : revoir requêtes
+		.usersByUsernameQuery("select username,password,'true' as enabled from users where username=?")
 		.authoritiesByUsernameQuery("select username, role from users where username=?");
 	}
 	
-	//TODO : ajouter contraintes	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-        //.antMatchers("/").hasAnyRole("ADMIN","USER")
-        .antMatchers("/login*","/home").permitAll()
+		.antMatchers("/login","/","/app/error").permitAll()
+        .antMatchers("/admin/*").hasAuthority("ADMIN")
         .anyRequest().authenticated()
         .and()
-        .formLogin()//.loginPage("/login.html")
+        .formLogin()
         .defaultSuccessUrl("/bidList/list",true)
         .and()
-        .logout();
+        .logout()
+        .and()
+        .exceptionHandling().accessDeniedPage("/app/error");
 	}
 	
 }

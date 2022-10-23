@@ -1,6 +1,6 @@
 
 CREATE TABLE bid_list (
-  BidListId tinyint(4) NOT NULL AUTO_INCREMENT,
+  BidListId integer NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
   bidQuantity DOUBLE,
@@ -27,7 +27,7 @@ CREATE TABLE bid_list (
 );
 
 CREATE TABLE trade (
-  TradeId tinyint(4) NOT NULL AUTO_INCREMENT,
+  TradeId integer NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
   buyQuantity DOUBLE,
@@ -53,7 +53,7 @@ CREATE TABLE trade (
 );
 
 CREATE TABLE curve_point (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id integer NOT NULL AUTO_INCREMENT,
   CurveId tinyint,
   asOfDate TIMESTAMP,
   term DOUBLE ,
@@ -64,7 +64,7 @@ CREATE TABLE curve_point (
 );
 
 CREATE TABLE rating (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id integer NOT NULL AUTO_INCREMENT,
   moodysRating VARCHAR(125),
   sandPRating VARCHAR(125),
   fitchRating VARCHAR(125),
@@ -74,7 +74,7 @@ CREATE TABLE rating (
 );
 
 CREATE TABLE rule_name (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id integer NOT NULL AUTO_INCREMENT,
   name VARCHAR(125),
   description VARCHAR(125),
   json VARCHAR(125),
@@ -86,7 +86,7 @@ CREATE TABLE rule_name (
 );
 
 CREATE TABLE users (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id integer NOT NULL AUTO_INCREMENT,
   username VARCHAR(125),
   password VARCHAR(125),
   fullname VARCHAR(125),

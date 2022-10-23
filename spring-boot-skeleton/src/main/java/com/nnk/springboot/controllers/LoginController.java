@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,7 +39,7 @@ public class LoginController {
         mav.setViewName("user/list");
         return mav;
     }
-
+/*
     @GetMapping("error")
     public ModelAndView error() {
     	logger.info("GET : /error");
@@ -47,4 +49,13 @@ public class LoginController {
         mav.setViewName("403");
         return mav;
     }
+    */
+    @RequestMapping("/error")
+    public String error(Model model) {
+    	logger.info("GET : /error");
+        String errorMessage= "You are not authorized for the requested data.";
+        model.addAttribute("errorMsg", errorMessage);
+        return "403";
+    }
+    
 }

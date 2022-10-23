@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class HomeController{
 	}
 
 	@RequestMapping("/admin/home")
-	public String adminHome(Model model){
+	public String adminHome(Model model,Authentication auth){
 		logger.info("GET : /admin/home");
 		return "redirect:/bidList/list";
 	}

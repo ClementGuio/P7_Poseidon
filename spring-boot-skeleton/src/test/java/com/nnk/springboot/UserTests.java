@@ -25,7 +25,7 @@ public class UserTests {
 
 	@Test
 	public void tradeTest() {
-		User user = new User("user","password","fullname","TEST");
+		User user = new User("user","Password.8","fullname","TEST");
 		// Save
 		user = userRepository.save(user);
 		Assert.assertNotNull(user.getId());

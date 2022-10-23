@@ -169,7 +169,7 @@ public class BidListControllerTest {
 			.andExpect(status().isFound())
 			.andExpect(model().hasNoErrors());
 		
-		List<BidList> res = repo.findByAccount("accountTest");
+		List<BidList> res = repo.findByAccount("BIDLIST TEST");
 		for (BidList bid : res) {
 			repo.delete(bid);
 		}

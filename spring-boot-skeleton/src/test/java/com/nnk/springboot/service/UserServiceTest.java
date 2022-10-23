@@ -21,9 +21,9 @@ public class UserServiceTest {
 	UserService service;
 	
 	@Test
-	public void tradeServiceTest() {
-		User user1 = new User("user1","password","fullname","TEST");
-		User user2 = new User("user2","password","fullname","TEST");
+	public void userServiceTest() {
+		User user1 = new User("user1","Password.8","fullname","TEST");
+		User user2 = new User("user2","Password.8","fullname","TEST");
 
 		// Save
 		user1 = service.saveUser(user1);
